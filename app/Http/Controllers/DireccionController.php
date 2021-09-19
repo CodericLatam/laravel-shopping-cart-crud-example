@@ -14,7 +14,7 @@ class DireccionController extends Controller
      */
     public function index()
     {
-        $direccions = Direccion::all();
+        $direccions = Direccion::paginate(10);
         return view('direccion.index', compact('direccions'));
     }
 

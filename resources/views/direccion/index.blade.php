@@ -38,6 +38,7 @@
                         @endforelse
                     </tbody>
                 </table>
+                {{ $direccions->links() }}
             </div>
         </div>
     </div>

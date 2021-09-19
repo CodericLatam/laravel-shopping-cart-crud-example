@@ -33,6 +33,7 @@
                         @endforelse
                     </tbody>
                 </table>
+                {{ $contactos->links() }}
             </div>
         </div>
     </div>
