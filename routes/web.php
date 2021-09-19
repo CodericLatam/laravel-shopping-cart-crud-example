@@ -22,7 +22,7 @@ use Laravel\Jetstream\Http\Controllers\Inertia\CurrentUserController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::middleware(['auth:sanctum', 'verified'])->prefix('panel')->group(function () {
+Route::middleware(['auth:sanctum', 'verified'])->prefix('panel')->name('panel.')->group(function () {
     Route::resources([
         'contactos' => ContactoController::class,
         'direccions' => DireccionController::class,
