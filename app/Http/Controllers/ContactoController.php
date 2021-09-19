@@ -15,7 +15,7 @@ class ContactoController extends Controller
     public function index()
     {
         $contactos = Contacto::paginate(10);
-        return view('contactos.index', compact('contactos'));
+        return view('contacto.index', compact('contactos'));
     }
 
     /**
