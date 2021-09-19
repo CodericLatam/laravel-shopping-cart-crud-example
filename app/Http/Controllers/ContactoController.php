@@ -14,7 +14,8 @@ class ContactoController extends Controller
      */
     public function index()
     {
-        //
+        $contactos = Contacto::paginate(10);
+        return view('contactos.index', compact('contactos'));
     }
 
     /**
@@ -24,7 +25,7 @@ class ContactoController extends Controller
      */
     public function create()
     {
-        //
+        return view('contacto.create');
     }
 
     /**
@@ -35,7 +36,13 @@ class ContactoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'telefono' => 'required',
+            'email' => 'required',
+        ]);
+        Contacto::create($request->all());
+        return redirect()->route('contacto.index')->with('success', 'Contacto creado exitosamente.');
     }
 
     /**
@@ -46,7 +53,7 @@ class ContactoController extends Controller
      */
     public function show(Contacto $contacto)
     {
-        //
+        return view('contacto.show', compact('contacto'));
     }
 
     /**
@@ -57,7 +64,7 @@ class ContactoController extends Controller
      */
     public function edit(Contacto $contacto)
     {
-        //
+        return view('contacto.edit', compact('contacto'));
     }
 
     /**
@@ -69,7 +76,14 @@ class ContactoController extends Controller
      */
     public function update(Request $request, Contacto $contacto)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'telefono' => 'required',
+            'email' => 'required',
+        ]);
+        $contacto->update($request->all());
+        return redirect()->route('contacto.show', $contacto)
+        ->with('info', 'Contacto actualizado con éxito');
     }
 
     /**
@@ -80,6 +94,8 @@ class ContactoController extends Controller
      */
     public function destroy(Contacto $contacto)
     {
-        //
+        $contacto->delete();
+        return back()->with('info', 'Eliminado correctamente')
+        ->with('success', 'Contacto eliminado con éxito');
     }
 }

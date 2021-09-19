@@ -14,7 +14,8 @@ class DireccionController extends Controller
      */
     public function index()
     {
-        //
+        $direccions = Direccion::all();
+        return view('direccion.index', compact('direccions'));
     }
 
     /**
@@ -24,7 +25,7 @@ class DireccionController extends Controller
      */
     public function create()
     {
-        //
+        return view('direccion.create');
     }
 
     /**
@@ -35,7 +36,15 @@ class DireccionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'direccion' => 'required',
+            'localidad' => 'required',
+            'ciudad' => 'required',
+            'distrito' => 'required',
+            'pais' => 'required',
+        ]);
+        Direccion::create($request->all());
+        return redirect()->route('direccion.index')->with('success', 'Direccion creada con exito');
     }
 
     /**
@@ -46,7 +55,7 @@ class DireccionController extends Controller
      */
     public function show(Direccion $direccion)
     {
-        //
+        return view('direccion.show', compact('direccion'));
     }
 
     /**
@@ -57,7 +66,7 @@ class DireccionController extends Controller
      */
     public function edit(Direccion $direccion)
     {
-        //
+        return view('direccion.edit', compact('direccion'));
     }
 
     /**
@@ -69,7 +78,15 @@ class DireccionController extends Controller
      */
     public function update(Request $request, Direccion $direccion)
     {
-        //
+        $request->validate([
+            'direccion' => 'required',
+            'localidad' => 'required',
+            'ciudad' => 'required',
+            'distrito' => 'required',
+            'pais' => 'required',
+        ]);
+        $direccion->update($request->all());
+        return redirect()->route('direccion.index')->with('success', 'Direccion actualizada con exito');
     }
 
     /**
@@ -80,6 +97,7 @@ class DireccionController extends Controller
      */
     public function destroy(Direccion $direccion)
     {
-        //
+        $direccion->delete();
+        return redirect()->route('direccion.index')->with('success', 'Direccion eliminada con exito');
     }
 }

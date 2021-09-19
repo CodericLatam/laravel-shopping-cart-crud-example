@@ -14,7 +14,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $items = Item::all();
+        return view('items.index', compact('items'));
     }
 
     /**
@@ -24,7 +25,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        return view('items.create');
     }
 
     /**
@@ -35,7 +36,12 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'producto_id' => 'required',
+            'cantidad' => 'required',
+        ]);
+        Item::create($request->all());
+        return redirect()->route('items.index')->with('success', 'Item creado satisfactoriamente.');
     }
 
     /**
@@ -46,7 +52,7 @@ class ItemController extends Controller
      */
     public function show(Item $item)
     {
-        //
+        return view('items.show', compact('item'));
     }
 
     /**
@@ -57,7 +63,7 @@ class ItemController extends Controller
      */
     public function edit(Item $item)
     {
-        //
+        return view('items.edit', compact('item'));
     }
 
     /**
@@ -69,7 +75,12 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        //
+        $request->validate([
+            'producto_id' => 'required',
+            'cantidad' => 'required',
+        ]);
+        $item->update($request->all());
+        return redirect()->route('items.index')->with('success', 'Item actualizado satisfactoriamente.');
     }
 
     /**
@@ -80,6 +91,7 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+        $item->delete();
+        return redirect()->route('items.index')->with('success', 'Item eliminado satisfactoriamente.');
     }
 }

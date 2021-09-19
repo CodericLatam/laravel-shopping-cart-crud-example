@@ -14,7 +14,8 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        //
+        $pedidos = Pedido::all();
+        return view('pedidos.index', compact('pedidos'));
     }
 
     /**
@@ -24,7 +25,7 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        //
+        return view('pedidos.create');
     }
 
     /**
@@ -35,7 +36,13 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+              'cliente_id' => 'required',
+              'fecha' => 'required',
+            
+        ]);
+        Pedido::create($request->all());
+        return redirect()->route('pedidos.index')->with('success', 'Pedido creado satisfactoriamente!');
     }
 
     /**
@@ -46,7 +53,7 @@ class PedidoController extends Controller
      */
     public function show(Pedido $pedido)
     {
-        //
+        return view('pedidos.show', compact('pedido'));
     }
 
     /**
@@ -57,7 +64,7 @@ class PedidoController extends Controller
      */
     public function edit(Pedido $pedido)
     {
-        //
+        return view('pedidos.edit', compact('pedido'));
     }
 
     /**
@@ -69,7 +76,12 @@ class PedidoController extends Controller
      */
     public function update(Request $request, Pedido $pedido)
     {
-        //
+        $request->validate([
+            'cliente_id' => 'required',
+            'fecha' => 'required',
+        ]);
+        $pedido->update($request->all());
+        return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado satisfactoriamente!');
     }
 
     /**
@@ -80,6 +92,7 @@ class PedidoController extends Controller
      */
     public function destroy(Pedido $pedido)
     {
-        //
+        $pedido->delete();
+        return redirect()->route('pedidos.index')->with('success', 'Pedido eliminado satisfactoriamente!');
     }
 }

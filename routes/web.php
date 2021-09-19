@@ -22,14 +22,15 @@ use Laravel\Jetstream\Http\Controllers\Inertia\CurrentUserController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resources([
-    'contactos' => ContactoController::class,
-    'direccions' => DireccionController::class,
-    'items' => ItemController::class,
-    'pedidos' => PedidoController::class,
-    'productos' => ProductoController::class,
-]);
-
+Route::middleware(['auth:sanctum', 'verified'])->prefix('panel')->group(function () {
+    Route::resources([
+        'contactos' => ContactoController::class,
+        'direccions' => DireccionController::class,
+        'items' => ItemController::class,
+        'pedidos' => PedidoController::class,
+        'productos' => ProductoController::class,
+    ]);
+});
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
