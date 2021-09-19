@@ -42,7 +42,7 @@ class ContactoController extends Controller
             'email' => 'required',
         ]);
         Contacto::create($request->all());
-        return redirect()->route('contacto.index')->with('success', 'Contacto creado exitosamente.');
+        return redirect()->route('panel.contactos.index')->with('success', 'Contacto creado exitosamente.');
     }
 
     /**
@@ -82,7 +82,7 @@ class ContactoController extends Controller
             'email' => 'required',
         ]);
         $contacto->update($request->all());
-        return redirect()->route('contacto.show', $contacto)
+        return redirect()->route('panel.contactos.show', $contacto)
         ->with('info', 'Contacto actualizado con éxito');
     }
 

@@ -25,7 +25,7 @@ class PedidoController extends Controller
      */
     public function create()
     {
-        return view('pedidos.create');
+        return view('pedido.create');
     }
 
     /**
@@ -42,7 +42,7 @@ class PedidoController extends Controller
             
         ]);
         Pedido::create($request->all());
-        return redirect()->route('pedidos.index')->with('success', 'Pedido creado satisfactoriamente!');
+        return redirect()->route('pedido.index')->with('success', 'Pedido creado satisfactoriamente!');
     }
 
     /**
@@ -53,7 +53,7 @@ class PedidoController extends Controller
      */
     public function show(Pedido $pedido)
     {
-        return view('pedidos.show', compact('pedido'));
+        return view('pedido.show', compact('pedido'));
     }
 
     /**
@@ -64,7 +64,7 @@ class PedidoController extends Controller
      */
     public function edit(Pedido $pedido)
     {
-        return view('pedidos.edit', compact('pedido'));
+        return view('pedido.edit', compact('pedido'));
     }
 
     /**
@@ -81,7 +81,7 @@ class PedidoController extends Controller
             'fecha' => 'required',
         ]);
         $pedido->update($request->all());
-        return redirect()->route('pedidos.index')->with('success', 'Pedido actualizado satisfactoriamente!');
+        return redirect()->route('pedido.index')->with('success', 'Pedido actualizado satisfactoriamente!');
     }
 
     /**
@@ -93,6 +93,6 @@ class PedidoController extends Controller
     public function destroy(Pedido $pedido)
     {
         $pedido->delete();
-        return redirect()->route('pedidos.index')->with('success', 'Pedido eliminado satisfactoriamente!');
+        return redirect()->route('pedido.index')->with('success', 'Pedido eliminado satisfactoriamente!');
     }
 }
