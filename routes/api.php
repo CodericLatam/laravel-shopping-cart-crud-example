@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Agregando autenticación
-Route::middleware('auth:sanctum')->group(function () {
+//Route::middleware('auth:sanctum')->group(function () {
     Route::apiResources([
         'contactos' => ContactoController::class,
         'direccions' => DireccionController::class,
@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
         'pedidos' => PedidoController::class,
         'productos' => ProductoController::class,
     ]);
-});
+//});
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

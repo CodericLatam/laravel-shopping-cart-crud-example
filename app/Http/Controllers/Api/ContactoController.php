@@ -28,7 +28,13 @@ class ContactoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'telefono' => 'required',
+            'email' => 'required',
+        ]);
+        Contacto::create($request->all());
+        return response()->json(['message' => 'Contacto creado con exito!'], 201);
     }
 
     /**
@@ -51,7 +57,13 @@ class ContactoController extends Controller
      */
     public function update(Request $request, Contacto $contacto)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'telefono' => 'required',
+            'email' => 'required',
+        ]);
+        $contacto->update($request->all());
+        return response()->json(['message' => 'Contacto actualizado con exito!'], 200);
     }
 
     /**
@@ -62,6 +74,7 @@ class ContactoController extends Controller
      */
     public function destroy(Contacto $contacto)
     {
-        //
+        $contacto->delete();
+        return response()->json(['message' => 'Contacto eliminado con exito!'], 200);
     }
 }
