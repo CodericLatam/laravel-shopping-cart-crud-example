@@ -82,8 +82,8 @@ class ContactoController extends Controller
             'email' => 'required',
         ]);
         $contacto->update($request->all());
-        return redirect()->route('panel.contactos.show', $contacto)
-        ->with('info', 'Contacto actualizado con éxito');
+        return redirect()->route('panel.contactos.index')
+        ->with('success', 'Contacto actualizado con éxito');
     }
 
     /**
