@@ -15,12 +15,11 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
-                    
                     <x-jet-nav-link href="{{ route('panel.contactos.index') }}" :active="request()->routeIs('panel.contactos.index')">
                         {{ __('Contactos') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('panel.direccions.index') }}" :active="request()->routeIs('panel.direccions.index')">
-                        {{ __('Direccions') }}
+                        {{ __('Direcciones') }}
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('panel.pedidos.index') }}" :active="request()->routeIs('panel.pedidos.index')">
                         {{ __('Pedidos') }}

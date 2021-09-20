@@ -16,6 +16,7 @@
                             <th class="px-4 py-2">Nombre</th>
                             <th class="px-4 py-2">Telefono</th>
                             <th class="px-4 py-2">Email</th>
+                            <th class="px-4 py-2"><i class="fas fa-plus-square"></i></th>
                         </th>
                     </thead>
                     <tbody>
