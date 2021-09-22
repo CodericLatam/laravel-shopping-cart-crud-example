@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\Crud\DireccionEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\DireccionCollection;
 use App\Http\Resources\DireccionResource;
@@ -28,7 +29,17 @@ class DireccionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'contacto_id' => 'required',
+            'direccion' => 'required',
+            'localidad' => 'required',
+            'ciudad' => 'required',
+            'distrito' => 'required',
+            'pais' => 'required',
+        ]);
+        $direccion=Direccion::create($request->all());
+//        event(new DireccionEvent('create', $direccion));
+        return response()->json(['message' => 'Dirección creado con exito!'], 201);
     }
 
     /**
@@ -39,7 +50,8 @@ class DireccionController extends Controller
      */
     public function show(Direccion $direccion)
     {
-        return new DireccionResource($direccion);
+        return $direccion;
+        return (new DireccionResource($direccion))->response()->setStatusCode(200);
     }
 
     /**
@@ -51,7 +63,17 @@ class DireccionController extends Controller
      */
     public function update(Request $request, Direccion $direccion)
     {
-        //
+        $request->validate([
+            'contacto_id' => 'required',
+            'direccion' => 'required',
+            'localidad' => 'required',
+            'ciudad' => 'required',
+            'distrito' => 'required',
+            'pais' => 'required',
+        ]);
+        $direccion->update($request->all());
+//        event(new DireccionEvent('update', $direccion));
+        return response()->json(['message' => 'Dirección actualizado con exito!'], 200);
     }
 
     /**
@@ -62,6 +84,8 @@ class DireccionController extends Controller
      */
     public function destroy(Direccion $direccion)
     {
-        //
+//        event(new DireccionEvent('delete', $direccion));
+        $direccion->delete();
+        return response()->json(['message' => 'Dirección eliminada con exito!'], 200);
     }
 }

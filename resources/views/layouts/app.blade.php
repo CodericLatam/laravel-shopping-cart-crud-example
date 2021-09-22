@@ -34,13 +34,22 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <main id="app">
+                @if($message=Session::get('success'))
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
+                            <strong class="font-bold text-xl mr-2">Excelente!</strong>
+                            <div class="alert alert-success">
+                                <p>{{$message}}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
                 {{ $slot }}
             </main>
         </div>
 
         @stack('modals')
-
         @livewireScripts
     </body>
 </html>

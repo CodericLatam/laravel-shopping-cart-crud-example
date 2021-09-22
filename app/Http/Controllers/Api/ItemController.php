@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\Crud\ItemEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ItemCollection;
 use App\Http\Resources\ItemResource;
@@ -28,7 +29,15 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'telefono' => 'required',
+            'email' => 'required',
+        ]);
+        
+        $item = Item::create($request->all());
+        //event(new ItemEvent('create', $item));
+        return response()->json(['message' => 'Item creado con exito!'], 201);
     }
 
     /**
@@ -51,7 +60,14 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'telefono' => 'required',
+            'email' => 'required',
+        ]);
+        $item->update($request->all());
+        //event(new ItemEvent('update', $item));
+        return response()->json(['message' => 'Item actualizado con exito!'], 200);
     }
 
     /**
@@ -62,6 +78,8 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+        $item->delete();
+        //event(new ItemEvent('delete', $item));
+        return response()->json(['message' => 'Item eliminado con exito!'], 200);
     }
 }

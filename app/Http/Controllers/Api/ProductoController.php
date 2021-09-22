@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\Crud\ProductoEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProductoCollection;
 use App\Http\Resources\ProductoResource;
@@ -28,7 +29,16 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'telefono' => 'required',
+            'email' => 'required',
+        ]);
+        
+        $producto = Producto::create($request->all());
+
+        //event(new ProductoEvent('create', $producto));
+        return response()->json(['message' => 'Producto creado con exito!'], 201);
     }
 
     /**
@@ -51,7 +61,15 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'telefono' => 'required',
+            'email' => 'required',
+        ]);
+
+        $producto->update($request->all());
+        //event(new ProductoEvent('update', $producto));
+        return response()->json(['message' => 'Producto actualizado con exito!'], 200);
     }
 
     /**
@@ -62,6 +80,8 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
-        //
+        $producto->delete();
+        //event(new ProductoEvent('delete', $producto));
+        return response()->json(['message' => 'Producto eliminado con exito!'], 200);
     }
 }

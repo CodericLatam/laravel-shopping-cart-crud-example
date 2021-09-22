@@ -37,6 +37,7 @@ class DireccionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'contacto_id' => 'required',
             'direccion' => 'required',
             'localidad' => 'required',
             'ciudad' => 'required',
@@ -44,7 +45,7 @@ class DireccionController extends Controller
             'pais' => 'required',
         ]);
         Direccion::create($request->all());
-        return redirect()->route('direccion.index')->with('success', 'Direccion creada con exito');
+        return redirect()->route('panel.direccions.index')->with('success', 'Direccion creada con exito');
     }
 
     /**
@@ -79,6 +80,7 @@ class DireccionController extends Controller
     public function update(Request $request, Direccion $direccion)
     {
         $request->validate([
+            'contacto_id' => 'required',
             'direccion' => 'required',
             'localidad' => 'required',
             'ciudad' => 'required',
@@ -86,7 +88,7 @@ class DireccionController extends Controller
             'pais' => 'required',
         ]);
         $direccion->update($request->all());
-        return redirect()->route('direccion.index')->with('success', 'Direccion actualizada con exito');
+        return redirect()->route('direccions.index')->with('success', 'Direccion actualizada con exito');
     }
 
     /**
@@ -98,6 +100,6 @@ class DireccionController extends Controller
     public function destroy(Direccion $direccion)
     {
         $direccion->delete();
-        return redirect()->route('direccion.index')->with('success', 'Direccion eliminada con exito');
+        return redirect()->route('direccions.index')->with('success', 'Direccion eliminada con exito');
     }
 }

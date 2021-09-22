@@ -33,7 +33,7 @@ class ContactoController extends Controller
             'telefono' => 'required',
             'email' => 'required',
         ]);
-        Contacto::create($request->all());
+        $contacto=Contacto::create($request->all());
         return response()->json(['message' => 'Contacto creado con exito!'], 201);
     }
 
@@ -45,7 +45,7 @@ class ContactoController extends Controller
      */
     public function show(Contacto $contacto)
     {
-        return new ContactoResource($contacto);
+        return (new ContactoResource($contacto))->response()->setStatusCode(200);
     }
 
     /**
@@ -75,6 +75,7 @@ class ContactoController extends Controller
     public function destroy(Contacto $contacto)
     {
         $contacto->delete();
-        return response()->json(['message' => 'Contacto eliminado con exito!'], 200);
+        return response()->json(['message' => 'Contacto eliminado con exito!'], 201)
+        ->setStatusCode(201);
     }
 }

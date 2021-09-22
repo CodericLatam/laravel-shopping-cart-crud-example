@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class ContactoController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -82,8 +83,7 @@ class ContactoController extends Controller
             'email' => 'required',
         ]);
         $contacto->update($request->all());
-        return redirect()->route('panel.contactos.index')
-        ->with('success', 'Contacto actualizado con éxito');
+        return back()->with('success', 'Contacto actualizado con éxito');
     }
 
     /**
@@ -95,7 +95,6 @@ class ContactoController extends Controller
     public function destroy(Contacto $contacto)
     {
         $contacto->delete();
-        return back()->with('info', 'Eliminado correctamente')
-        ->with('success', 'Contacto eliminado con éxito');
+        return redirect()->route('contacto.index')->with('success', 'Contacto eliminado con éxito');
     }
 }

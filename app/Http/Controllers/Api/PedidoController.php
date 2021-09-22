@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\Crud\PedidoEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PedidoCollection;
 use App\Http\Resources\PedidoResource;
@@ -28,7 +29,15 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'telefono' => 'required',
+            'email' => 'required',
+        ]);
+        
+        $pedido = Pedido::create($request->all());
+        //event(new PedidoEvent('create', $pedido));
+        return response()->json(['message' => 'Pedido creado correctamente'], 201);
     }
 
     /**
@@ -51,7 +60,15 @@ class PedidoController extends Controller
      */
     public function update(Request $request, Pedido $pedido)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'telefono' => 'required',
+            'email' => 'required',
+        ]);
+        
+        $pedido->update($request->all());
+        //event(new PedidoEvent('update', $pedido));
+        return response()->json(['message' => 'Pedido actualizado correctamente'], 200);
     }
 
     /**
@@ -62,6 +79,8 @@ class PedidoController extends Controller
      */
     public function destroy(Pedido $pedido)
     {
-        //
+        $pedido->delete();
+        //event(new PedidoEvent('delete', $pedido));
+        return response()->json(['message' => 'Pedido eliminado correctamente'], 200);
     }
 }
