@@ -29,6 +29,7 @@ class ContactoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'user_id' => 'required',
             'nombre' => 'required',
             'telefono' => 'required',
             'email' => 'required',
@@ -58,6 +59,7 @@ class ContactoController extends Controller
     public function update(Request $request, Contacto $contacto)
     {
         $request->validate([
+            'user_id' => 'required',
             'nombre' => 'required',
             'telefono' => 'required',
             'email' => 'required',

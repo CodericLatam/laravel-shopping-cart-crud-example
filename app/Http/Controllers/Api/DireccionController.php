@@ -30,7 +30,7 @@ class DireccionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'contacto_id' => 'required',
+            'user_id' => 'required',
             'direccion' => 'required',
             'localidad' => 'required',
             'ciudad' => 'required',
@@ -38,8 +38,7 @@ class DireccionController extends Controller
             'pais' => 'required',
         ]);
         $direccion=Direccion::create($request->all());
-//        event(new DireccionEvent('create', $direccion));
-        return response()->json(['message' => 'Dirección creado con exito!'], 201);
+        return response()->json(['message' => 'Dirección creado con exito!', 'data' => $direccion], 200);
     }
 
     /**
@@ -64,7 +63,7 @@ class DireccionController extends Controller
     public function update(Request $request, Direccion $direccion)
     {
         $request->validate([
-            'contacto_id' => 'required',
+            'user_id' => 'required',
             'direccion' => 'required',
             'localidad' => 'required',
             'ciudad' => 'required',
@@ -72,8 +71,7 @@ class DireccionController extends Controller
             'pais' => 'required',
         ]);
         $direccion->update($request->all());
-//        event(new DireccionEvent('update', $direccion));
-        return response()->json(['message' => 'Dirección actualizado con exito!'], 200);
+        return response()->json(['message' => 'Dirección actualizado con exito!', 'data' => $direccion], 200);
     }
 
     /**
@@ -84,7 +82,6 @@ class DireccionController extends Controller
      */
     public function destroy(Direccion $direccion)
     {
-//        event(new DireccionEvent('delete', $direccion));
         $direccion->delete();
         return response()->json(['message' => 'Dirección eliminada con exito!'], 200);
     }

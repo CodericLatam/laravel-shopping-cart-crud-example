@@ -36,8 +36,6 @@ use App\Observers\BroadcastingModel\ProductoObserver;
 use App\Observers\BroadcastingModel\ProductoTipoObserver;
 use App\Observers\BroadcastingModel\UserObserver;
 
-
-
 class EventServiceProvider extends ServiceProvider
 {
     /**
