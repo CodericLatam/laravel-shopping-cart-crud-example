@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\EstadoResource;
 use App\Models\Estado;
 use Illuminate\Http\Request;
 
@@ -39,7 +40,7 @@ class EstadoController extends Controller
      */
     public function show(Estado $estado)
     {
-        //
+        return new EstadoResource($estado);
     }
 
     /**

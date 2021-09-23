@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Contacto;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ContactoRequest;
 
 class ContactoController extends Controller
 {
@@ -36,14 +37,8 @@ class ContactoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContactoRequest $request)
     {
-        $request->validate([
-            'user_id' => 'required',
-            'nombre' => 'required',
-            'telefono' => 'required',
-            'email' => 'required',
-        ]);
         $contacto=Contacto::create($request->all());
         return redirect()->route('admin.contacto.edit', $contacto->id)->with('success', 'Contacto creado exitosamente.');
     }
@@ -77,14 +72,8 @@ class ContactoController extends Controller
      * @param  \App\Models\Contacto  $contacto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contacto $contacto)
+    public function update(ContactoRequest $request, Contacto $contacto)
     {
-        $request->validate([
-            'user_id' => 'required',
-            'nombre' => 'required',
-            'telefono' => 'required',
-            'email' => 'required',
-        ]);
         $contacto->update($request->all());
         return back()->with('success', 'Contacto actualizado con éxito');
     }

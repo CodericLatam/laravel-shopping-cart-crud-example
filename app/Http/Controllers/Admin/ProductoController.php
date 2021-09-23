@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductoRequest;
 
 class ProductoController extends Controller
 {
@@ -35,16 +36,8 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductoRequest $request)
     {
-        $request->validate([
-            'producto_tipo_id' => 'required',
-            'nombre' => 'required',
-            'foto' => 'required',
-            'descripcion' => 'required',
-            'unidad' => 'required',
-            'precio' => 'required',
-        ]);
         $producto=Producto::create($request->all());
         return redirect()->route('admin.producto.edit', $producto->id)->with('success', 'Producto creado con éxito');
     }
@@ -78,16 +71,8 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Producto $producto)
+    public function update(ProductoRequest $request, Producto $producto)
     {
-        $request->validate([
-            'producto_tipo_id' => 'required',
-            'nombre' => 'required',
-            'foto' => 'required',
-            'descripcion' => 'required',
-            'unidad' => 'required',
-            'precio' => 'required',
-        ]);
         $producto->update($request->all());
         return redirect()->route('admin.producto.index')->with('success', 'Producto actualizado con éxito');
     }

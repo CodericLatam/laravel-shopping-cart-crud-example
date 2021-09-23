@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\InventarioRequest;
+use App\Http\Resources\InventarioResource;
 use App\Models\Inventario;
 use Illuminate\Http\Request;
 
@@ -24,13 +26,9 @@ class InventarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InventarioRequest $request)
     {
-        $request->validate([
-            'producto_id' => 'required',
-            'inventario' => 'required',
-            'costo' => 'required',
-        ]);
+        
     }
 
     /**
@@ -41,7 +39,7 @@ class InventarioController extends Controller
      */
     public function show(Inventario $inventario)
     {
-        //
+        return new InventarioResource($inventario);
     }
 
     /**
@@ -51,13 +49,9 @@ class InventarioController extends Controller
      * @param  \App\Models\Inventario  $inventario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Inventario $inventario)
+    public function update(InventarioRequest $request, Inventario $inventario)
     {
-        $request->validate([
-            'producto_id' => 'required',
-            'inventario' => 'required',
-            'costo' => 'required',
-        ]);
+        
     }
 
     /**

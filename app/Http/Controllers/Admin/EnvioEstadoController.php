@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EnvioEstadoRequest;
 use App\Models\EnvioEstado;
 use Illuminate\Http\Request;
 
@@ -35,14 +36,8 @@ class EnvioEstadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EnvioEstadoRequest $request)
     {
-        
-        $request->validate([
-            'envio_id' => 'required',
-            'estado_id' => 'required',
-            'descripcion' => 'required',
-        ]);
     }
 
     /**
@@ -74,13 +69,8 @@ class EnvioEstadoController extends Controller
      * @param  \App\Models\EnvioEstado  $envioEstado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EnvioEstado $envioEstado)
+    public function update(EnvioEstadoRequest $request, EnvioEstado $envioEstado)
     {
-        $request->validate([
-             'envio_id' => 'required',
-             'estado_id' => 'required',
-             'descripcion' => 'required',
-        ]);
         //
     }
 

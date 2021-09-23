@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PagoRequest;
 use App\Models\Pago;
 use Illuminate\Http\Request;
 
@@ -35,12 +36,8 @@ class PagoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PagoRequest $request)
     {
-        $request->validate([
-            'descripcion' => 'required',
-        ]);
-
         $pago=Pago::create($request->all());
         return redirect()->route('admin.pago.edit', $pago->id)->with('success', 'Pago guardado con éxito');
     }
@@ -74,12 +71,8 @@ class PagoController extends Controller
      * @param  \App\Models\Pago  $pago
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Pago $pago)
+    public function update(PagoRequest $request, Pago $pago)
     {
-        $request->validate([
-            'descripcion' => 'required',
-        ]);
-
         $pago->update($request->all());
         return redirect()->route('admin.pago.index')->with('success', 'Pago actualizado con éxito');
     }

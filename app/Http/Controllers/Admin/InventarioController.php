@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\InventarioRequest;
 use App\Models\Inventario;
 use Illuminate\Http\Request;
 
@@ -35,14 +36,8 @@ class InventarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InventarioRequest $request)
     {
-        $request->validate([
-            'producto_id' => 'required',
-            'inventario' => 'required',
-            'costo' => 'required',
-        ]);
-
         $inventario=Inventario::create($request->all());
         return redirect()->route('admin.inventario.edit', $inventario->id)->with('status', 'Inventario creado con éxito');
     }
@@ -76,14 +71,8 @@ class InventarioController extends Controller
      * @param  \App\Models\Inventario  $inventario
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Inventario $inventario)
+    public function update(InventarioRequest $request, Inventario $inventario)
     {
-        $request->validate([
-            'producto_id' => 'required',
-            'inventario' => 'required',
-            'costo' => 'required',
-        ]);
-
         $inventario->update($request->all());
         return redirect()->back()->with('success', 'Inventario actualizado con éxito');
     }

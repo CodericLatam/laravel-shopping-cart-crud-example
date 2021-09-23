@@ -34,19 +34,20 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::resources([
             'contacto' => ContactoAdminController::class,
             'direccion' => DireccionAdminController::class,
-            'envio.producto' => EnvioProductoAdminController::class,
-            'envio.estado' => EnvioEstadoAdminController::class,
             'envio' => EnvioAdminController::class,
-            'envio.tipo' => EnvioTipoAdminController::class,
             'estado' => EstadoAdminController::class,
             'inventario' => InventarioAdminController::class,
-            'pago.envio' => PagoEnvioAdminController::class,
             'pago' => PagoAdminController::class,
+            'producto' => ProductoAdminController::class,
+            'user' => UserAdminController::class,
+            
+            'envio.producto' => EnvioProductoAdminController::class,
+            'envio.estado' => EnvioEstadoAdminController::class,
+            'envio.tipo' => EnvioTipoAdminController::class,
+            'pago.envio' => PagoEnvioAdminController::class,
             'pago.tipo' => PagoTipoAdminController::class,
             'pago.envio' => PagoEnvioAdminController::class,
-            'producto' => ProductoAdminController::class,
             'producto.tipo' => ProductoTipoAdminController::class,
-            'user' => UserAdminController::class,
         ]);
     });
 });

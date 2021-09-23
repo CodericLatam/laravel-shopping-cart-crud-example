@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PagoTipoRequest;
 use App\Models\PagoTipo;
 use Illuminate\Http\Request;
 
@@ -24,11 +25,8 @@ class PagoTipoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PagoTipoRequest $request)
     {
-        $request->validate([
-            'descripcion' => 'required',
-        ]);
     }
 
     /**
@@ -49,11 +47,9 @@ class PagoTipoController extends Controller
      * @param  \App\Models\PagoTipo  $pagoTipo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PagoTipo $pagoTipo)
+    public function update(PagoTipoRequest $request, PagoTipo $pagoTipo)
     {
-        $request->validate([
-            'descripcion' => 'required',
-        ]);
+        
     }
 
     /**

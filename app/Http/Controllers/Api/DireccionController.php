@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Events\Crud\DireccionEvent;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DireccionRequest;
 use App\Http\Resources\DireccionCollection;
 use App\Http\Resources\DireccionResource;
 use App\Models\Direccion;
@@ -27,18 +28,10 @@ class DireccionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DireccionRequest $request)
     {
-        $request->validate([
-            'user_id' => 'required',
-            'direccion' => 'required',
-            'localidad' => 'required',
-            'ciudad' => 'required',
-            'distrito' => 'required',
-            'pais' => 'required',
-        ]);
         $direccion=Direccion::create($request->all());
-        return response()->json(['message' => 'Dirección creado con exito!', 'data' => $direccion], 200);
+        return response()->json(['message' => 'Dirección creado con exito!', 'data' => $direccion], 201);
     }
 
     /**
@@ -49,8 +42,7 @@ class DireccionController extends Controller
      */
     public function show(Direccion $direccion)
     {
-        return $direccion;
-        return (new DireccionResource($direccion))->response()->setStatusCode(200);
+        return new DireccionResource($direccion);
     }
 
     /**
@@ -60,16 +52,8 @@ class DireccionController extends Controller
      * @param  \App\Models\Direccion  $direccion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Direccion $direccion)
+    public function update(DireccionRequest $request, Direccion $direccion)
     {
-        $request->validate([
-            'user_id' => 'required',
-            'direccion' => 'required',
-            'localidad' => 'required',
-            'ciudad' => 'required',
-            'distrito' => 'required',
-            'pais' => 'required',
-        ]);
         $direccion->update($request->all());
         return response()->json(['message' => 'Dirección actualizado con exito!', 'data' => $direccion], 200);
     }

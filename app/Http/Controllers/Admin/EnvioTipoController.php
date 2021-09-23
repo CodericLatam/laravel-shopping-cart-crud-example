@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EnvioTipoRequest;
 use App\Models\EnvioTipo;
 use Illuminate\Http\Request;
 
@@ -34,11 +35,9 @@ class EnvioTipoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EnvioTipoRequest $request)
     {
-        $request->validate([
-            'descripcion' => 'required',
-        ]);
+
     }
 
     /**
@@ -70,11 +69,9 @@ class EnvioTipoController extends Controller
      * @param  \App\Models\EnvioTipo  $envioTipo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EnvioTipo $envioTipo)
+    public function update(EnvioTipoRequest $request, EnvioTipo $envioTipo)
     {
-        $request->validate([
-            'descripcion' => 'required',
-        ]);
+        
     }
 
     /**

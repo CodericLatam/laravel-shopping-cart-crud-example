@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PagoEnvioRequest;
 use App\Models\PagoEnvio;
 use Illuminate\Http\Request;
 
@@ -24,13 +25,8 @@ class PagoEnvioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PagoEnvio $request)
     {
-        $request->validate([
-            'envio_id' => 'required',
-            'pago_id' => 'required',
-            'valor' => 'required',
-        ]);
     }
 
     /**
@@ -51,13 +47,9 @@ class PagoEnvioController extends Controller
      * @param  \App\Models\PagoEnvio  $pagoEnvio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PagoEnvio $pagoEnvio)
+    public function update(PagoEnvioRequest $request, PagoEnvio $pagoEnvio)
     {
-        $request->validate([
-            'envio_id' => 'required',
-            'pago_id' => 'required',
-            'valor' => 'required',
-        ]);
+
     }
 
     /**

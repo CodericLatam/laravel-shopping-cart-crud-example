@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Direccion;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DireccionRequest;
 
 class DireccionController extends Controller
 {
@@ -35,15 +36,9 @@ class DireccionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DireccionRequest $request)
     {
         $request->validate([
-            'user_id' => 'required',
-            'direccion' => 'required',
-            'localidad' => 'required',
-            'ciudad' => 'required',
-            'distrito' => 'required',
-            'pais' => 'required',
         ]);
         $direccion=Direccion::create($request->all());
         return redirect()->route('admin.direccion.edit', $direccion->id)->with('success', 'Direccion creada con exito');
@@ -78,16 +73,8 @@ class DireccionController extends Controller
      * @param  \App\Models\Direccion  $direccion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Direccion $direccion)
+    public function update(DireccionRequest $request, Direccion $direccion)
     {
-        $request->validate([
-            'user_id' => 'required',
-            'direccion' => 'required',
-            'localidad' => 'required',
-            'ciudad' => 'required',
-            'distrito' => 'required',
-            'pais' => 'required',
-        ]);
         $direccion->update($request->all());
         return redirect()->route('admin.direccion.index')->with('success', 'Direccion actualizada con exito');
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Events\Crud\ProductoEvent;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductoRequest;
 use App\Http\Resources\ProductoCollection;
 use App\Http\Resources\ProductoResource;
 use App\Models\Producto;
@@ -27,16 +28,8 @@ class ProductoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductoRequest $request)
     {
-        $request->validate([
-            'producto_tipo_id' => 'required',
-            'nombre' => 'required',
-            'foto' => 'required',
-            'descripcion' => 'required',
-            'unidad' => 'required',
-            'precio' => 'required',
-        ]);
         
         $producto = Producto::create($request->all());
 
@@ -62,16 +55,8 @@ class ProductoController extends Controller
      * @param  \App\Models\Producto  $producto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Producto $producto)
+    public function update(ProductoRequest $request, Producto $producto)
     {
-        $request->validate([
-            'producto_tipo_id' => 'required',
-            'nombre' => 'required',
-            'foto' => 'required',
-            'descripcion' => 'required',
-            'unidad' => 'required',
-            'precio' => 'required',
-        ]);
 
         $producto->update($request->all());
         //event(new ProductoEvent('update', $producto));

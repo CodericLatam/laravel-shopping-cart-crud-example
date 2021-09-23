@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ContactoRequest;
 use App\Http\Resources\ContactoCollection;
 use App\Http\Resources\ContactoResource;
 use App\Models\Contacto;
@@ -26,16 +27,10 @@ class ContactoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContactoRequest $request)
     {
-        $request->validate([
-            'user_id' => 'required',
-            'nombre' => 'required',
-            'telefono' => 'required',
-            'email' => 'required',
-        ]);
         $contacto=Contacto::create($request->all());
-        return response()->json(['message' => 'Contacto creado con exito!'], 201);
+        return response()->json(['message' => 'Contacto creado con exito!', 'data' => $contacto], 201);
     }
 
     /**
@@ -46,7 +41,7 @@ class ContactoController extends Controller
      */
     public function show(Contacto $contacto)
     {
-        return (new ContactoResource($contacto))->response()->setStatusCode(200);
+        return new ContactoResource($contacto);
     }
 
     /**
@@ -56,16 +51,10 @@ class ContactoController extends Controller
      * @param  \App\Models\Contacto  $contacto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contacto $contacto)
+    public function update(ContactoRequest $request, Contacto $contacto)
     {
-        $request->validate([
-            'user_id' => 'required',
-            'nombre' => 'required',
-            'telefono' => 'required',
-            'email' => 'required',
-        ]);
         $contacto->update($request->all());
-        return response()->json(['message' => 'Contacto actualizado con exito!'], 200);
+        return response()->json(['message' => 'Contacto actualizado con exito!', 'data' => $contacto], 200);
     }
 
     /**
@@ -77,7 +66,7 @@ class ContactoController extends Controller
     public function destroy(Contacto $contacto)
     {
         $contacto->delete();
-        return response()->json(['message' => 'Contacto eliminado con exito!'], 201)
+        return response()->json(['message' => 'Contacto eliminado con exito!'], 200)
         ->setStatusCode(201);
     }
 }

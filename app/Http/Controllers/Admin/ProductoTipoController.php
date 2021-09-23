@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductoTipoRequest;
 use App\Models\ProductoTipo;
 use Illuminate\Http\Request;
 
@@ -34,11 +35,9 @@ class ProductoTipoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductoTipoRequest $request)
     {
-        $request->validate([
-            'descripcion' => 'required',
-        ]);
+        
     }
 
     /**
@@ -70,11 +69,9 @@ class ProductoTipoController extends Controller
      * @param  \App\Models\ProductoTipo  $productoTipo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductoTipo $productoTipo)
+    public function update(ProductoTipoRequest $request, ProductoTipo $productoTipo)
     {
-        $request->validate([
-            'descripcion' => 'required',
-        ]);
+        
     }
 
     /**

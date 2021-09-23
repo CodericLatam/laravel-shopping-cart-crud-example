@@ -56,6 +56,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        /*
         Contacto::observe(new ContactoObserver);
         Direccion::observe(new DireccionObserver);
         EnvioEstado::observe(new EnvioEstadoObserver);
@@ -70,6 +71,6 @@ class EventServiceProvider extends ServiceProvider
         Producto::observe(new ProductoObserver);
         ProductoTipo::observe(new ProductoTipoObserver);
         User::observe(new UserObserver);
-
+        */
     }
 }

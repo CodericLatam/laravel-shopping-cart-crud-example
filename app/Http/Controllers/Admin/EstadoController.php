@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EstadoRequest;
 use App\Models\Estado;
 use Illuminate\Http\Request;
 
@@ -35,11 +36,8 @@ class EstadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EstadoRequest $request)
     {
-        $request->validate([
-            'descripcion' => 'required',
-        ]);
         $estado=Estado::create($request->all());
         return redirect()->route('admin.estado.edit', $estado->id)->with('status', 'Estado creado con éxito');
     }
@@ -73,11 +71,8 @@ class EstadoController extends Controller
      * @param  \App\Models\Estado  $estado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Estado $estado)
+    public function update(EstadoRequest $request, Estado $estado)
     {
-        $request->validate([
-            'descripcion' => 'required',
-        ]);
         $estado->update($request->all());
         return redirect()->route('admin.estado.index')->with('status', 'Estado actualizado con éxito');
     }

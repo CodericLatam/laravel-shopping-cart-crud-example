@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EnvioRequest;
 use App\Http\Resources\EnvioCollection;
+use App\Http\Resources\EnvioResource;
 use App\Models\Envio;
 use Illuminate\Http\Request;
 
@@ -25,21 +27,8 @@ class EnvioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EnvioRequest $request)
     {
-        $request->validate([
-            
-            'user_id' => 'required',
-            'envio_tipo_id' => 'required',
-            'pago_tipo_id' => 'required',
-            'envio_direccion' => 'required',
-            'pago_direccion' => 'required',
-            'precio' => 'required',
-            'costo_envio' => 'required',
-            'descuento' => 'required',
-            'total' => 'required',
-        ]);
-
         $envio = Envio::create($request->all());
         return response()->json(['message' => 'Envio crreado con éxito', 'data' => $envio], 200);
     }
@@ -52,7 +41,7 @@ class EnvioController extends Controller
      */
     public function show(Envio $envio)
     {
-        //
+        return new EnvioResource($envio);
     }
 
     /**
@@ -62,20 +51,9 @@ class EnvioController extends Controller
      * @param  \App\Models\Envio  $envio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Envio $envio)
+    public function update(EnvioRequest $request, Envio $envio)
     {
-        $request->validate([
-            
-            'user_id' => 'required',
-            'envio_tipo_id' => 'required',
-            'pago_tipo_id' => 'required',
-            'envio_direccion' => 'required',
-            'pago_direccion' => 'required',
-            'precio' => 'required',
-            'costo_envio' => 'required',
-            'descuento' => 'required',
-            'total' => 'required',
-        ]);
+        
     }
 
     /**
