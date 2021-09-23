@@ -12,18 +12,16 @@ class Contacto extends Model
     use HasFactory;
     use BroadcastsEvents;
     use Notifiable;
-    protected $_guards = [];
-    protected $fillable = ['nombre','telefono','email'];
     
-    public function direcciones()
-    {
-        return $this->belongsToMany(Direccion::class);
+    protected $_guards = [];
+    protected $fillable = ['user_id', 'nombre','telefono','email'];
+    
+    public function user(){
+        return $this->belongsTo(User::class);
     }
-
+    
     public function broadcastOn($event)
     {
-       // return [$this, $this->direcciones];
-       
-       return [$this];
+        return [$this, $this->user];
     }
 }

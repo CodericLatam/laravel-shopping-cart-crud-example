@@ -15,7 +15,7 @@ class CreateDireccionsTable extends Migration
     {
         Schema::create('direccions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('contacto_id')->nullable();
+            $table->foreignId('user_id')->constrained();
             $table->text('direccion');
             $table->string('localidad');
             $table->string('ciudad');
