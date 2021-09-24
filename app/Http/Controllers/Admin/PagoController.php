@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PagoRequest;
 use App\Models\Pago;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class PagoController extends Controller
@@ -85,7 +86,11 @@ class PagoController extends Controller
      */
     public function destroy(Pago $pago)
     {
-        $pago->delete();
-        return back()->with('success', 'Eliminado correctamente');
+        try {
+            $pago->delete();
+            return back()->with('success', 'Eliminado correctamente');
+        }catch (QueryException $e){
+            return back()->with('error', 'No se puede eliminar el pago porque está relacionado con otro registro.');
+        }
     }
 }

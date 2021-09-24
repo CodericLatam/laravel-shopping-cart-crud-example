@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -78,7 +79,11 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-        return back()->with('success', 'Usuario eliminado correctamente');
+        try {
+            $user->delete();
+            return back()->with('success', 'Usuario eliminado correctamente');
+        }catch (QueryException $e){
+            return back()->with('error', 'No se puede eliminar el producto porque está relacionado con otro registro.');
+        }
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductoRequest;
 use App\Models\ProductoTipo;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
@@ -95,8 +96,12 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
-        $producto->deleteProductoPhoto();
-        $producto->delete();
-        return back()->with('success', 'Producto eliminado con éxito');
+        try {
+            $producto->deleteProductoPhoto();
+            $producto->delete();
+            return back()->with('success', 'Producto eliminado con éxito');
+        }catch (QueryException $e){
+            return back()->with('error', 'No se puede eliminar el producto porque está relacionado con otro registro.');
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EnvioRequest;
 use App\Models\Envio;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class EnvioController extends Controller
@@ -85,7 +86,11 @@ class EnvioController extends Controller
      */
     public function destroy(Envio $envio)
     {
-        $envio->delete();
-        return back()->with('status', 'Envio eliminado con éxito');
+        try {
+            $envio->delete();
+            return back()->with('status', 'Envio eliminado con éxito');
+        }catch (QueryException $e){
+            return back()->with('error', 'No se puede eliminar el envio porque está relacionado con otro registro.');
+        }
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\InventarioRequest;
 use App\Models\Inventario;
 use App\Models\Producto;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class InventarioController extends Controller
@@ -87,7 +88,11 @@ class InventarioController extends Controller
      */
     public function destroy(Inventario $inventario)
     {
-        $inventario->delete();
-        return back()->with('success', 'Inventario eliminado con éxito');
+        try {
+            $inventario->delete();
+            return back()->with('success', 'Inventario eliminado con éxito');
+        }catch (QueryException $e){
+            return back()->with('error', 'No se puede eliminar el inventario porque está relacionado con otro registro.');
+        }
     }
 }

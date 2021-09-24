@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactoRequest;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 
 class ContactoController extends Controller
 {
@@ -88,7 +89,11 @@ class ContactoController extends Controller
      */
     public function destroy(Contacto $contacto)
     {
-        $contacto->delete();
-        return back()->with('success', 'Contacto eliminado con éxito');
+        try {
+            $contacto->delete();
+            return back()->with('success', 'Contacto eliminado con éxito');        
+        }catch (QueryException $e){
+            return back()->with('error', 'No se puede eliminar el contacto porque está relacionado con otro registro.');
+        }
     }
 }

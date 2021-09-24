@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DireccionRequest;
 use App\Models\User;
+use Illuminate\Database\QueryException;
 
 class DireccionController extends Controller
 {
@@ -88,7 +89,11 @@ class DireccionController extends Controller
      */
     public function destroy(Direccion $direccion)
     {
-        $direccion->delete();
-        return redirect()->route('admin.direccion.index')->with('success', 'Direccion eliminada con exito');
+        try {
+            $direccion->delete();
+            return redirect()->route('admin.direccion.index')->with('success', 'Dirección eliminada con exito');
+        }catch (QueryException $e){
+            return back()->with('error', 'No se puede eliminar la dirección porque está relacionado con otro registro.');
+        }
     }
 }
