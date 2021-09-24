@@ -17,7 +17,7 @@ class InventarioController extends Controller
      */
     public function index()
     {
-        //
+        return (new InventarioResource(Inventario::paginate(10)))->response()->setStatusCode(200);
     }
 
     /**
