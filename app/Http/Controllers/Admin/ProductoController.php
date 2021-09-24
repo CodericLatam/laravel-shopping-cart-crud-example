@@ -6,6 +6,8 @@ use App\Models\Producto;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductoRequest;
+use App\Models\ProductoTipo;
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -27,7 +29,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        return view('admin.producto.create');
+        return view('admin.producto.create', ['producto_tipos'=>ProductoTipo::all()]);
     }
 
     /**
@@ -38,7 +40,11 @@ class ProductoController extends Controller
      */
     public function store(ProductoRequest $request)
     {
+
+        
         $producto=Producto::create($request->all());
+        $producto->foto=$request->foto->move(public_path('storage/productos'), $request->foto->getClientOriginalName());
+        $producto->save();
         return redirect()->route('admin.producto.edit', $producto->id)->with('success', 'Producto creado con éxito');
     }
 
@@ -61,7 +67,7 @@ class ProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
-        return view('admin.producto.edit', compact('producto'));
+        return view('admin.producto.edit', compact('producto'), ['producto_tipos'=>ProductoTipo::all()]);
     }
 
     /**
@@ -74,6 +80,10 @@ class ProductoController extends Controller
     public function update(ProductoRequest $request, Producto $producto)
     {
         $producto->update($request->all());
+        
+        if(isset($request->safe()->foto)){
+            $producto->updateProductoPhoto($request->foto);
+        }
         return redirect()->route('admin.producto.index')->with('success', 'Producto actualizado con éxito');
     }
 
@@ -85,6 +95,7 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
+        $producto->deleteProductoPhoto();
         $producto->delete();
         return back()->with('success', 'Producto eliminado con éxito');
     }

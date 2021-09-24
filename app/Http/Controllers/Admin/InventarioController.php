@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InventarioRequest;
 use App\Models\Inventario;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
 class InventarioController extends Controller
 {
+    public $productos;
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +29,7 @@ class InventarioController extends Controller
      */
     public function create()
     {
-        return view('admin.inventario.create');
+        return view('admin.inventario.create', ['productos'=>Producto::all()]);
     }
 
     /**
@@ -61,7 +63,7 @@ class InventarioController extends Controller
      */
     public function edit(Inventario $inventario)
     {
-        return view('admin.inventario.edit', compact('inventario'));
+        return view('admin.inventario.edit', compact('inventario'), ['productos'=>Producto::all()]);
     }
 
     /**

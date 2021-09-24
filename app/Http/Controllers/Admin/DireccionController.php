@@ -6,6 +6,7 @@ use App\Models\Direccion;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DireccionRequest;
+use App\Models\User;
 
 class DireccionController extends Controller
 {
@@ -27,7 +28,7 @@ class DireccionController extends Controller
      */
     public function create()
     {
-        return view('admin.direccion.create');
+        return view('admin.direccion.create', ['users'=>User::all()]);
     }
 
     /**
@@ -63,7 +64,7 @@ class DireccionController extends Controller
      */
     public function edit(Direccion $direccion)
     {
-        return view('admin.direccion.edit', compact('direccion'));
+        return view('admin.direccion.edit', compact('direccion'), ['users'=>User::all()]);
     }
 
     /**

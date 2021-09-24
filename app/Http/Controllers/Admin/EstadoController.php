@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EstadoRequest;
 use App\Models\Estado;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class EstadoController extends Controller
@@ -85,7 +86,12 @@ class EstadoController extends Controller
      */
     public function destroy(Estado $estado)
     {
-        $estado->delete();
-        return back()->with('status', 'Estado eliminado con éxito');
+        try {
+            $estado->delete();
+            return back()->with('success', 'Estado eliminado con éxito');
+        
+        }catch (QueryException $e){
+            return back()->with('error', 'No se puede eliminar el estado porque está relacionado con otro registro.');
+        }
     }
 }

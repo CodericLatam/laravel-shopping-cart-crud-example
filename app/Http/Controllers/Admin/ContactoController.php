@@ -6,10 +6,15 @@ use App\Models\Contacto;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactoRequest;
+use App\Models\User;
 
 class ContactoController extends Controller
 {
-    
+    public $users;
+    public function __construct()
+    {
+        $this->users=User::all();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -39,6 +44,8 @@ class ContactoController extends Controller
      */
     public function store(ContactoRequest $request)
     {
+
+        $this->users=User::all();
         $contacto=Contacto::create($request->all());
         return redirect()->route('admin.contacto.edit', $contacto->id)->with('success', 'Contacto creado exitosamente.');
     }
@@ -62,7 +69,7 @@ class ContactoController extends Controller
      */
     public function edit(Contacto $contacto)
     {
-        return view('admin.contacto.edit', compact('contacto'));
+        return view('admin.contacto.edit', compact('contacto'), ['users'=>$this->users]);
     }
 
     /**
