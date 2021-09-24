@@ -11,7 +11,7 @@ class ProductoRequest extends FormRequest
         return [
             'producto_tipo_id' => 'required',
             'nombre' => 'required',
-            'foto' => 'required',
+            'foto' => 'nullable|mimes:jpeg,png|max:1014',
             'descripcion' => 'required',
             'unidad' => 'required',
             'precio' => 'required',
