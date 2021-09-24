@@ -17,13 +17,9 @@ class Estado extends Model
     protected $fillable = [
         'descripcion',
     ];
-
-    public function envio_estado(){
-        return $this->belongsTo(EnvioEstado::class);
-    }
     
     public function broadcastOn($event)
     {
-        return [$this, $this->envio_estado];
+        return [$this];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\HasTrait\HasProductoFoto;
 use Illuminate\Database\Eloquent\BroadcastsEvents;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -10,6 +11,7 @@ use Illuminate\Notifications\Notifiable;
 class Producto extends Model
 {
     use HasFactory;
+    use HasProductoFoto;
     use BroadcastsEvents;
     use Notifiable;
     
@@ -36,6 +38,6 @@ class Producto extends Model
     
     public function broadcastOn($event)
     {
-        return [$this, $this->user];
+        return [$this, $this->producto_tipo];
     }
 }

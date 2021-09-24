@@ -14,6 +14,7 @@ class Inventario extends Model
     use Notifiable;
     
     protected $_guards = [];
+    
     protected $fillable = [
         'producto_id',
         'inventario',

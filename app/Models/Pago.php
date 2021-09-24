@@ -18,9 +18,6 @@ class Pago extends Model
         'descripcion',
     ];
 
-    public function pago_detalle(){
-        return $this->belongsTo(PagoDetalle::class);
-    }
     
     public function broadcastOn($event)
     {
