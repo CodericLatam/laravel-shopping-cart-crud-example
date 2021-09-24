@@ -10,11 +10,6 @@ use App\Models\User;
 
 class ContactoController extends Controller
 {
-    public $users;
-    public function __construct()
-    {
-        $this->users=User::all();
-    }
     /**
      * Display a listing of the resource.
      *
@@ -33,7 +28,7 @@ class ContactoController extends Controller
      */
     public function create()
     {
-        return view('admin.contacto.create');
+        return view('admin.contacto.create', ['users'=>User::all()]);
     }
 
     /**
@@ -69,7 +64,7 @@ class ContactoController extends Controller
      */
     public function edit(Contacto $contacto)
     {
-        return view('admin.contacto.edit', compact('contacto'), ['users'=>$this->users]);
+        return view('admin.contacto.edit', compact('contacto'), ['users'=>User::all()]);
     }
 
     /**

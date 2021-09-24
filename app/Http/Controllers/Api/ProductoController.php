@@ -71,8 +71,8 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
+        $producto->deleteProductoPhoto();
         $producto->delete();
-        //event(new ProductoEvent('delete', $producto));
         return response()->json(['message' => 'Producto eliminado con exito!'], 200);
     }
 }
