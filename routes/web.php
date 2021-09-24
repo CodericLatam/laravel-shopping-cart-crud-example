@@ -40,7 +40,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             'pago' => PagoAdminController::class,
             'producto' => ProductoAdminController::class,
             'user' => UserAdminController::class,
-            
+            /*
+             * TODO
             'envio.producto' => EnvioProductoAdminController::class,
             'envio.estado' => EnvioEstadoAdminController::class,
             'envio.tipo' => EnvioTipoAdminController::class,
@@ -48,6 +49,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             'pago.tipo' => PagoTipoAdminController::class,
             'pago.envio' => PagoEnvioAdminController::class,
             'producto.tipo' => ProductoTipoAdminController::class,
+             
+             */
         ]);
     });
 });

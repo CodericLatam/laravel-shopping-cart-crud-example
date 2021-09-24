@@ -25,19 +25,23 @@ Route::fallback(function () {
     Route::apiResources([
         'contacto' => ContactoController::class,
         'direccion' => DireccionController::class,
-        'envio.producto' => EnvioProductoController::class,
-        'envio.estado' => EnvioEstadoController::class,
         'envio' => EnvioController::class,
-        'envio.tipo' => EnvioTipoController::class,
         'estado' => EstadoController::class,
         'inventario' => InventarioController::class,
-        'pago.envio' => PagoEnvioController::class,
         'pago' => PagoController::class,
+        'producto' => ProductoController::class,
+        'user' => UserController::class,
+        /*
+         * TODO
+        'envio.producto' => EnvioProductoController::class,
+        'envio.estado' => EnvioEstadoController::class,
+        'envio.tipo' => EnvioTipoController::class,
+        'pago.envio' => PagoEnvioController::class,
         'pago.tipo' => PagoTipoController::class,
         'pago.envio' => PagoEnvioController::class,
-        'producto' => ProductoController::class,
         'producto.tipo' => ProductoTipoController::class,
-        'user' => UserController::class,
+         * 
+         */
     ]);
 //});
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
