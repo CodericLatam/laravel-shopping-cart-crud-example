@@ -53,4 +53,5 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
              */
         ]);
     });
+    Route::view('user/billing','profile.billing')->name('profile.billing');
 });
