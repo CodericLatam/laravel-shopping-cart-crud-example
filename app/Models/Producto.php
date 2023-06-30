@@ -35,7 +35,6 @@ class Producto extends Model
         return $this->belongsTo(ProductoTipo::class);
     }
 
-    
     public function broadcastOn($event)
     {
         return [$this, $this->producto_tipo];
