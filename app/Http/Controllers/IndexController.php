@@ -12,10 +12,10 @@ class IndexController extends Controller
     }
     public function tienda()
     {
-        return view('welcome');
+        return view('tienda');
     }
     public function carrito()
     {
-        return view('welcome');
+        return view('carrito');
     }
 }
