@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ProductoSeeder extends Seeder
 {
@@ -13,6 +14,5 @@ class ProductoSeeder extends Seeder
      */
     public function run()
     {
-        //
     }
 }
